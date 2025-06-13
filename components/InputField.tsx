@@ -17,7 +17,7 @@ const InputField: React.FC<InputFieldProps> = React.memo(({
   value,
   onChange,
   placeholder,
-  type = "number", // Original default
+  type = "text", // Changed default from "number" to "text"
   unit
 }) => {
   return (
@@ -26,18 +26,20 @@ const InputField: React.FC<InputFieldProps> = React.memo(({
         {label} {unit && `(${unit})`}
       </label>
       <input
-        type={type} // Use the provided type
+        type={type} // Use the provided type, which will now default to "text"
+        inputMode="decimal" // Added for better mobile UX with numeric-like input
         id={id}
         name={id}
         value={value}
         onChange={onChange}
         placeholder={placeholder}
         className="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm transition-colors"
+        autoComplete="off" // Add autocomplete off to prevent browser interference
       />
     </div>
   );
 });
 
-InputField.displayName = 'InputField'; // Optional: for better debugging
+InputField.displayName = 'InputField';
 
 export default InputField;

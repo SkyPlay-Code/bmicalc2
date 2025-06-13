@@ -27,21 +27,15 @@ const BMICalculatorForm: React.FC<BMICalculatorFormProps> = ({
   weightLbs, setWeightLbs,
   onUnitSwitch,
 }) => {
-  // Memoized factory for creating numeric input handlers
-  // This function itself is stable as it has no dependencies.
   const makeNumericInputHandler = useCallback((setter: (value: string) => void) => {
     return (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
-      // Allow empty string for clearing input, or valid numeric patterns
       if (value === '' || /^[0-9]*\.?[0-9]*$/.test(value)) {
          setter(value);
       }
     };
-  }, []); // Empty dependency array means this function is created once
+  }, []); 
 
-  // Create memoized handlers for each input field
-  // These handlers will be stable as long as `makeNumericInputHandler` and the respective `setter` are stable.
-  // `useState` setters are stable.
   const handleChangeHeightCm = useCallback(makeNumericInputHandler(setHeightCm), [makeNumericInputHandler, setHeightCm]);
   const handleChangeWeightKg = useCallback(makeNumericInputHandler(setWeightKg), [makeNumericInputHandler, setWeightKg]);
   const handleChangeHeightFt = useCallback(makeNumericInputHandler(setHeightFt), [makeNumericInputHandler, setHeightFt]);
@@ -61,18 +55,18 @@ const BMICalculatorForm: React.FC<BMICalculatorFormProps> = ({
             unit="cm"
             id="heightCm"
             value={heightCm}
-            onChange={handleChangeHeightCm} // Use memoized handler
+            onChange={handleChangeHeightCm}
             placeholder="Enter height in cm"
-            type="number" 
+            // type="number" prop removed, will use default "text" from InputField
           />
           <InputField
             label="Weight"
             unit="kg"
             id="weightKg"
             value={weightKg}
-            onChange={handleChangeWeightKg} // Use memoized handler
+            onChange={handleChangeWeightKg}
             placeholder="Enter weight in kg"
-            type="number"
+            // type="number" prop removed
           />
         </>
       ) : (
@@ -83,18 +77,18 @@ const BMICalculatorForm: React.FC<BMICalculatorFormProps> = ({
               unit="ft"
               id="heightFt"
               value={heightFt}
-              onChange={handleChangeHeightFt} // Use memoized handler
+              onChange={handleChangeHeightFt}
               placeholder="Feet"
-              type="number"
+              // type="number" prop removed
             />
             <InputField
-              label=" " // Empty label for alignment
+              label=" " 
               unit="in"
               id="heightIn"
               value={heightIn}
-              onChange={handleChangeHeightIn} // Use memoized handler
+              onChange={handleChangeHeightIn}
               placeholder="Inches"
-              type="number"
+              // type="number" prop removed
             />
           </div>
           <InputField
@@ -102,9 +96,9 @@ const BMICalculatorForm: React.FC<BMICalculatorFormProps> = ({
             unit="lbs"
             id="weightLbs"
             value={weightLbs}
-            onChange={handleChangeWeightLbs} // Use memoized handler
+            onChange={handleChangeWeightLbs}
             placeholder="Enter weight in lbs"
-            type="number"
+            // type="number" prop removed
           />
         </>
       )}
