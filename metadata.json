@@ -1,5 +1,6 @@
 {
   "name": "Premium BMI Calculator",
   "description": "A stylish and feature-rich BMI calculator with health insights powered by Gemini, and weight tracking.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [],
+  "prompt": ""
 }
